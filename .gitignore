@@ -6,6 +6,19 @@
 /build
 
 # Ignore OpenFrameworks
+/docs
+/examples
+/export
 /libs
+/other
+/scripts
+/INSTALL.md
+/CHANGELOG.md
+/LICENSE.md
+
 /addons/*
 !/addons/ofxAndroid
+
+/apps/*
+!/apps/myApps
+

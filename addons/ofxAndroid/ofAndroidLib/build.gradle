@@ -16,6 +16,7 @@ android {
             minifyEnabled false
         }
     }
+    // Configure source folders like Eclipse
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -33,24 +34,34 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-task compileOpenFrameworks(dependsOn: rootProject.ofNdkSetup) {
+/** Configure OpenFrameworks by writing paths.make */
+task configureOF(dependsOn: rootProject.ofNdkSetup) {
     def projectRoot = file("$rootDir/libs/openFrameworksCompiled/project")
-    def pathsFile = file("$projectRoot/android/paths.make")
-    pathsFile.withPrintWriter { out ->
-        out.println("NDK_ROOT=${rootProject.ofNdkSetup.ext.ndkDirectory}")
-        out.println("SDK_ROOT=${rootProject.ofNdkSetup.ext.sdkDirectory}")
-    }
-    rootProject.ofRunMake(["-C", projectRoot.absolutePath, "PLATFORM_OS=Android"])
-}
+    ext.projectRoot = projectRoot.absolutePath
 
-assembleDebug {
     doLast {
-        tasks.compileOpenFrameworks.execute()
+        def pathsFile = file("$projectRoot/android/paths.make")
+        pathsFile.withPrintWriter { out ->
+            out.println("NDK_ROOT=${rootProject.ofNdkSetup.ext.ndkDirectory}")
+            out.println("SDK_ROOT=${rootProject.ofNdkSetup.ext.sdkDirectory}")
+        }
     }
 }
 
-assembleRelease {
-    doLast {
-        tasks.compileOpenFrameworks.execute()
-    }
+/** Compile OpenFrameworks in the default configuration */
+task compileOF(dependsOn: configureOF) << {
+    rootProject.ofRunMake(["-C", configureOF.ext.projectRoot, "PLATFORM_OS=Android", "all"])
+}
+
+/** Clean OpenFrameworks */
+task cleanOF(dependsOn: configureOF) << {
+    rootProject.ofRunMake(["-C", configureOF.ext.projectRoot, "PLATFORM_OS=Android", "clean"])
+}
+
+clean {
+    dependsOn cleanOF
+}
+
+preBuild {
+    dependsOn compileOF
 }

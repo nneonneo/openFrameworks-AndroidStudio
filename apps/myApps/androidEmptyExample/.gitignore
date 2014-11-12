@@ -1,0 +1,21 @@
+/build
+
+# Ignore OpenFrameworks stuff
+/.classpath
+/.cproject
+/.project
+/.settings
+/AndroidManifest.xml
+/Makefile
+/addons.make
+/bin
+/build.xml
+/config.make
+/ic_launcher-web.png
+/libs
+/proguard-project.txt
+/project.properties
+/res
+/src
+/srcJava
+

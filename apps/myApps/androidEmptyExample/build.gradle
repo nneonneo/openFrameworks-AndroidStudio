@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "21.1.1"
+
+    defaultConfig {
+        applicationId "cc.openframeworks.androidEmptyExample"
+        minSdkVersion 8
+        targetSdkVersion 17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    // Configure source folders like Eclipse
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['java']
+            resources.srcDirs = ['java']
+            aidl.srcDirs = ['java']
+            renderscript.srcDirs = ['java']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+    }
+}
+
+dependencies {
+    compile project(':ofAndroidLib')
+}
+
+task compileReleaseOF(dependsOn: rootProject.ofNdkSetup) << {
+    rootProject.ofRunMake(["-C", projectDir.absolutePath, "PLATFORM_OS=Android", "Release"])
+}
+
+task compileDebugOF(dependsOn: rootProject.ofNdkSetup) << {
+    rootProject.ofRunMake(["-C", projectDir.absolutePath, "PLATFORM_OS=Android", "Debug"])
+}
+
+task cleanOF(dependsOn: rootProject.ofNdkSetup) << {
+    rootProject.ofRunMake(["-C", projectDir.absolutePath, "PLATFORM_OS=Android", "clean"])
+}
+
+clean {
+    dependsOn cleanOF
+}
+
+preBuild {
+    doLast {
+        tasks.preDebugBuild.doLast {
+            tasks.compileDebugOF.execute()
+        }
+        tasks.preReleaseBuild.doLast {
+            tasks.compileReleaseOF.execute()
+        }
+    }
+}

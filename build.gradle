@@ -79,8 +79,18 @@ def ofRunMake(List opts) {
     List cmd = [rootProject.ofNdkSetup.ext.make, "-j4"] + opts
     logger.info("Executing make command " + cmd)
     def proc = cmd.execute()
-    proc.in.eachLine {line -> logger.lifecycle(line)}
-    proc.err.eachLine {line -> logger.error(line)}
+    proc.in.eachLine {line ->
+        logger.lifecycle(line)
+    }
+    proc.err.eachLine {line ->
+        if(line.contains(": warning:")) {
+            logger.warn(line)
+        } else if(line.contains(": error:") || line.contains(": ***")) {
+            logger.error(line)
+        } else {
+            logger.quiet(line)
+        }
+    }
     proc.waitFor()
     if(proc.exitValue() != 0) {
         throw new GradleException("make failed with exit status " + proc.exitValue())
