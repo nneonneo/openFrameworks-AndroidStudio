@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/addons/ofxAndroid/ofAndroidLib" />
+            <option value="$PROJECT_DIR$/apps" />
+            <option value="$PROJECT_DIR$/apps/myApps" />
             <option value="$PROJECT_DIR$/apps/myApps/androidEmptyExample" />
           </set>
         </option>

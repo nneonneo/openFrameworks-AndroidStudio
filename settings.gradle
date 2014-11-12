@@ -1,5 +1,4 @@
 include ':ofAndroidLib'
 project(':ofAndroidLib').projectDir = new File('addons/ofxAndroid/ofAndroidLib')
 
-include ':androidEmptyExample'
-project(':androidEmptyExample').projectDir = new File('apps/myApps/androidEmptyExample')
+include ':apps:myApps:androidEmptyExample'
