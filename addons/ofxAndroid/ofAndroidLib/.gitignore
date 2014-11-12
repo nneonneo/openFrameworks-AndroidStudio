@@ -4,6 +4,5 @@
 src/
 res/
 build.xml
-AndroidManifest.xml
 proguard*
 project.properties
