@@ -6,3 +6,5 @@ res/
 build.xml
 proguard*
 project.properties
+.classpath
+.project
