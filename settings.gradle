@@ -1,0 +1,3 @@
+include ':ofAndroidLib'
+
+project(':ofAndroidLib').projectDir = new File('addons/ofxAndroid/ofAndroidLib')
