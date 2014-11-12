@@ -37,3 +37,5 @@ Android Studio should offer to fix these values for you when you open the approp
 - If you get strange linker errors (e.g. errors about a missing `__srget`), try using the r9d version
 of the NDK. Newer NDKs (particularly r10c and up) don't work with some versions of OpenFrameworks.
 
+- Getting a manifest merge error involving `ic_launcher`? Try replacing `addons/ofxAndroid/ofAndroidLib/AndroidManifest.xml` with
+the one from this repository, or just deleting the `<application>` tag from that file.
