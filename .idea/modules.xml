@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OpenFrameworks.iml" filepath="$PROJECT_DIR$/OpenFrameworks.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OpenFrameworksAndroidStudio.iml" filepath="$PROJECT_DIR$/OpenFrameworksAndroidStudio.iml" />
       <module fileurl="file://$PROJECT_DIR$/addons/ofxAndroid/ofAndroidLib/ofAndroidLib.iml" filepath="$PROJECT_DIR$/addons/ofxAndroid/ofAndroidLib/ofAndroidLib.iml" />
     </modules>
   </component>
