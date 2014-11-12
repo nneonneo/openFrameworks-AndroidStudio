@@ -1,1 +1,9 @@
 /build
+
+# Ignore OpenFrameworks files
+src/
+res/
+build.xml
+AndroidManifest.xml
+proguard*
+project.properties
