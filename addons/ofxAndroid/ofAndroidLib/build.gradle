@@ -35,7 +35,7 @@ dependencies {
 
 /** Configure OpenFrameworks by writing paths.make */
 task configureOF(dependsOn: rootProject.ofNdkSetup) {
-    def projectRoot = file("$rootDir/libs/openFrameworksCompiled/project")
+    def projectRoot = file("$projectDir/../../../libs/openFrameworksCompiled/project")
     ext.projectRoot = projectRoot.absolutePath
 
     doLast {
